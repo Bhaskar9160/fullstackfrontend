@@ -2,16 +2,17 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function AddUser() {
+export default function UserRole() {
   let navigate = useNavigate();
 
   const [user, setUser] = useState({
-    name: "",
-    username: "",
-    email: "",
+    userRoleId: "",
+    userName: "",
+    userType:"",
+    
   });
 
-  const { name, username, email } = user;
+  const { userRoleId, userName, userType } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -19,7 +20,7 @@ export default function AddUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8090/user", user);
+    await axios.post("http://localhost:8090/userrole", user);
     navigate("/");
   };
 
@@ -27,45 +28,45 @@ export default function AddUser() {
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Register User</h2>
+          <h2 className="text-center m-4">User Role Form</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
-              <label htmlFor="Name" className="form-label">
-                Name
+              <label htmlFor="UserRoleId" className="form-label">
+                userRoleId
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your name"
-                name="name"
-                value={name}
+                placeholder="Enter your RoleId"
+                name="userRoleId"
+                value={userRoleId}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="Username" className="form-label">
+              <label htmlFor="UserName" className="form-label">
                 Username
               </label>
               <input
                 type={"text"}
                 className="form-control"
                 placeholder="Enter your username"
-                name="username"
-                value={username}
+                name="userName"
+                value={userName}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="Email" className="form-label">
-                E-mail
+              <label htmlFor="UserType" className="form-label">
+                User Type
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your e-mail address"
-                name="email"
-                value={email}
+                placeholder="Enter your User Type"
+                name="userType"
+                value={userType}
                 onChange={(e) => onInputChange(e)}
               />
             </div>

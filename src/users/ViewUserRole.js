@@ -2,22 +2,24 @@ import axios from "axios";
 import React, { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-export default function ViewUser() {
-  const [user, setUser] = useState({
-    name: "",
-    username: "",
-    email: "",
+export default function ViewUserRole() {
+  const [userRole, setUserRole] = useState({
+    roleId: "",
+    userName: "",
+    userType: "",
   });
 
-  const { id } = useParams();
+  
+
+  const { roleId }=useParams();
 
   useEffect(() => {
-    loadUser();
+    loadUserRole();
   }, []);
 
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8090/user/${id}`);
-    setUser(result.data);
+  const loadUserRole = async () => {
+    const result = await axios.get(`http://localhost:8090/userrole/${roleId}`);
+    setUserRole(result.data);
   };
 
   return (
@@ -28,19 +30,16 @@ export default function ViewUser() {
 
           <div className="card">
             <div className="card-header">
-              Details of user id : {user.id}
+              Details of User Role : {userRole.roleId}
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                  <b>Name:</b>
-                  {user.name}
-                </li>
+                
                 <li className="list-group-item">
                   <b>UserName:</b>
-                  {user.username}
+                  {userRole.userName}
                 </li>
                 <li className="list-group-item">
-                  <b>Email:</b>
-                  {user.email}
+                  <b>UserType:</b>
+                  {userRole.userType}
                 </li>
               </ul>
             </div>
